@@ -1,0 +1,39 @@
+---
+export interface Props {
+    name: string;
+    quote: string;
+    title: string;
+    image: ImageMetadata;
+}
+
+import { Image } from 'astro:assets';
+
+const { quote, name, title, image } = Astro.props;
+---
+
+<div class='card border-secondary bg-white flex-grow-1 flex-shrink-1 w-auto'>
+    <div class='card-body d-flex flex-column align-items-between row-gap-5'>
+        <blockquote class='blockquote'>
+            <p class='fst-italic mb-0'>"{quote}"</p>
+        </blockquote>
+        <cite
+            class='card-quote d-flex flex-wrap gap-2 align-items-center fst-normal'>
+            <figure class='mb-0 ratio ratio-1x1'>
+                <Image
+                    src={image}
+                    alt={`${name} headshot`}
+                    class='img-fluid rounded-4 object-fit-cover w-100 h-100'
+                />
+            </figure>
+            <div class='d-flex flex-column'>
+                <p class='mb-0 fw-bold'>{name}</p>
+                <p class='mb-0'>{title}</p>
+            </div>
+        </cite>
+    </div>
+</div>
+<style>
+    figure {
+        max-width: 60px;
+    }
+</style>

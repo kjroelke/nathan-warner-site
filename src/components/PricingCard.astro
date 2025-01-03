@@ -1,0 +1,22 @@
+---
+export interface Props {
+    color?: 'primary' | 'secondary';
+    style?: 'solid' | 'outline';
+}
+
+const { color = 'secondary', style = 'outline' } = Astro.props;
+---
+
+<div
+    class:list={[
+        `pricing-card card border-${color} flex-grow-1 flex-shrink-1 w-auto`,
+        {
+            'bg-primary': 'solid' === style && 'primary' === color,
+            'bg-secondary': 'solid' === style && 'secondary' === color,
+            'text-white': 'solid' === style,
+        },
+    ]}>
+    <div class='card-body d-flex flex-column row-gap-3'>
+        <slot />
+    </div>
+</div>

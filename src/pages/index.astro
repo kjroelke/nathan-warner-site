@@ -1,47 +1,191 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro"
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { Image } from 'astro:assets';
+import image1 from '../assets/images/headshot-slider/1.jpg';
+import { SITE_TITLE } from '../consts';
+import FiveStarRating from '../components/FiveStarRating.astro';
+import TestimonialCard from '../components/TestimonialCard.astro';
+import ImageGrid from '../components/ImageGrid.astro';
+import PricingCard from '../components/PricingCard.astro';
 ---
 
 <BaseLayout>
-	<main class="container my-5">
-		<div class="row justify-content-center fs-6 row-gap-4">
-			<section class="col-lg-8">
-				<h1>Welcome to the Astro x Bootstrap Starter Kit</h1>
-				<h2>🧑‍💻 About this Project</h2>
-				<p>This was built to quickly write code that mirror's WordPress-style architecture and that uses Bootstrap 5.</p>
-				<p>Astro scopes CSS to the file you're in by default, so any global changes that need to be made should be made inside of the <kbd>src/scss</kbd> directory.</p>
-				<p>This is a Github Repo Template. It's made to be cut up and changed! It also comes with a default Github Pages <kbd>deploy.yml</kbd> file so you can quickly and easily share a preview URL. Configure the <kbd>astro.config.mjs</kbd> file with the proper <code>base</code> property value (it should be the name of the repo you're building in) to make things work. You'll need to restart your <code>npm run start</code> terminal command to update the URL in your browser. <a href="https://docs.astro.build/en/guides/deploy/github/#deploying-to-a-githubio-url" target="_blank" rel="noopener noreferrer" class="fw-bold">Learn more about deploying to a Github page here</a>.</p>
-				<h2>✨ Astro's Key Features</h2>
-				<ul>
-					<li>Section composition is super easy with <code>.astro</code> files! <ul><li>A <code>.astro</code> file can be used to join together files found in the <kbd>src/components</kbd> directory. This directory can include a mix of whatever file type you want. From <code>.html</code> to <code>.tsx</code>, Astro will take care of it!</li></ul></li>
-					<li>Creating a new page is easy: just create a new file in the <kbd>src/pages</kbd> directory.</li>
-					<li>The Astro equivalent to WordPress's "Page Templates" is the <kbd>src/layouts</kbd> directory. The only difference is that instead of using <code>`get_template_part()`</code> to call in other elements, you can either import them at the top of the file (between the <code>`---`</code> braces) or you can use the <code>`&lt;slot/&gt;`</code> method which allows you to pass whatever you want inside of it (similar to the WordPress function <code>`the_content()`</code> except you're writing code instead of using a WYSIWYG editor).</li>
-				</ul>
-			</section>
-			<section class="col-lg-8">
-				<h2>🚀 Project Structure</h2>
-				<p>Inside of your Astro project, you'll see the following folders and files:</p>
-				<pre>
-├── public/
-├── src/
-│   ├── components/
-│   ├── content/
-│   ├── layouts/
-│   └── pages/
-├── astro.config.mjs
-├── README.md
-├── package.json
-└── tsconfig.json
-				</pre>
-				<p>Astro looks for <code>.astro</code> or <code>.md</code> files in the <code>src/pages/</code> directory. Each page is exposed as a route based on its file name.</p>
-				<p>There's nothing special about <code>src/components/</code>, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.</p>
-				<p>The <code>src/content/</code> directory contains "collections" of related Markdown and MDX documents. Use <code>getCollection()</code> to retrieve posts from <code>src/content/blog/</code>, and type-check your frontmatter using an optional schema. See <a href="https://docs.astro.build/en/guides/content-collections/" target="_blank" rel="noreferrer noopener">Astro's Content Collections docs</a> to learn more.</p>
-				<p>Any static assets, like images, can be placed in the <code>public/</code> directory.</p>
-			</section>
-			<section class="col-lg-8">
-				<h2>👀 Want to learn more?</h2>
-				<p>Check out <a href="https://docs.astro.build" target="_blank" rel="noopener noreferrer">Astro's documentation</a> or jump into their <a href="https://astro.build/chat" target="_blank" rel="noopener noreferrer">Discord server</a>.</p>
-			</section>
-		</div>
-	</main>
+    <main class='container my-5 d-flex flex-column row-gap-5'>
+        <section
+            id='hello'
+            class='row row-cols-1 row-cols-lg-2 align-items-center py-5 row-gap-4'>
+            <div class='col'>
+                <h1 class='text-capitalize'>{SITE_TITLE}</h1>
+                <p class='fw-medium mb-4 h6'>
+                    Hello, my name is Nathan and I am a math nerd. I am a calm,
+                    funny and encouraging person who loves to capture
+                    significant moments in other people’s lives!
+                </p>
+                <div class='d-flex flex-wrap gap-2'>
+                    <a
+                        href='#'
+                        class='btn btn-primary'
+                        >Get Started</a
+                    ><a
+                        href='#'
+                        class='btn btn-outline-secondary'
+                        >My Work</a
+                    >
+                </div>
+            </div>
+            <div class='col'>
+                <Image
+                    src={image1}
+                    alt='Nathan'
+                    class='img-fluid rounded'
+                />
+            </div>
+        </section>
+        <section
+            id='testimonials'
+            class='d-flex flex-column gap-5 py-5'>
+            <div
+                class='row flex-column align-items-center gap-3 justify-content-center'>
+                <div class='col-auto'>
+                    <FiveStarRating />
+                </div>
+                <div class='col-lg-8 text-center'>
+                    <h2 class='mb-0'>What people are saying</h2>
+                    <span
+                        >The text element is intended for longform copy that
+                        could potentially include multiple paragraphs. You can
+                        also use it for single lines of copy if you wish.</span
+                    >
+                </div>
+            </div>
+            <div class='row row-cols-auto gx-0 gap-3'>
+                <TestimonialCard
+                    name='KJ Roelke'
+                    title='Web Developer'
+                    quote='Nathan is a great photographer!'
+                    image={image1}
+                />
+                <TestimonialCard
+                    name='KJ Roelke'
+                    title='Web Developer'
+                    quote='Nathan is a great photographer!'
+                    image={image1}
+                />
+                <TestimonialCard
+                    name='KJ Roelke'
+                    title='Web Developer'
+                    quote='Nathan is a great photographer!'
+                    image={image1}
+                />
+            </div>
+        </section>
+        <section
+            id='gallery'
+            class='py-5 d-flex flex-column gap-4'>
+            <div class='row justify-content-center'>
+                <div class='col-lg-8 text-center d-flex flex-column gap-3'>
+                    <p class='text-info mb-0 fw-bold fs-6'>
+                        Quick Caption Here
+                    </p>
+                    <div class='headline-callout'>
+                        <h2 class='mb-0'>Make people look at a gallery</h2>
+                        <p class='fs-6 mb-0'>
+                            The text element is intended for longform copy that
+                            could potentially include multiple paragraphs. You
+                            can also use it for single lines of copy if you
+                            wish.
+                        </p>
+                    </div>
+                    <div
+                        class='d-flex align-items-center justify-content-center gap-3'>
+                        <a
+                            href='#'
+                            class='fw-bold text-decoration-none fs-6'
+                            >Learn More</a
+                        >
+                        <a
+                            href='#'
+                            class='btn btn-primary'
+                            >Get Started</a
+                        >
+                    </div>
+                </div>
+            </div>
+            <div class='row gx-0'>
+                <ImageGrid />
+            </div>
+        </section>
+        <section
+            id='pricing'
+            class='d-flex flex-column gap-4 py-5'>
+            <div class='row justify-content-center'>
+                <div class='col-lg-8 text-center'>
+                    <h2 class='mb-0'>Simple Pricing Options</h2>
+                    <p class='mb-0 fs-6'>
+                        From weddings to graduations and other celebrations,
+                        I've got the perfect price for every occasion.
+                    </p>
+                </div>
+            </div>
+            <div class='row row-cols-1 row-cols-lg-3 gx-0 gap-3'>
+                <PricingCard>
+                    <div class='header'>
+                        <h3 class='text-secondary'>4 Hour Package</h3>
+                        <p class='fw-bold fs-6'>$1,600</p>
+                        <p>Perfect for keynotes and graduations</p>
+                    </div>
+                    <ul class='features fs-6 fw-bold'>
+                        <li>4 hours of video</li>
+                        <li>
+                            6+ minute highlight video <p class='fw-normal'>
+                                Blooper of family & guests (if available)
+                            </p>
+                        </li>
+                    </ul>
+                    <button class='btn btn-secondary'>Purchase</button>
+                </PricingCard>
+                <PricingCard
+                    style='solid'
+                    color='primary'>
+                    <div class='header'>
+                        <h3 class='text-white'>4 Hour Package</h3>
+                        <p class='fw-bold fs-6'>$1,600</p>
+                        <p>Perfect for keynotes and graduations</p>
+                    </div>
+                    <ul class='features fs-6 fw-bold'>
+                        <li>4 hours of video</li>
+                        <li>
+                            6+ minute highlight video <p class='fw-normal'>
+                                Blooper of family & guests (if available)
+                            </p>
+                        </li>
+                    </ul>
+                    <button class='btn btn-white'>Purchase</button>
+                </PricingCard>
+                <PricingCard
+                    style='outline'
+                    color='secondary'>
+                    <div class='header'>
+                        <h3 class='text-secondary'>4 Hour Package</h3>
+                        <p class='fw-bold fs-6'>$1,600</p>
+                        <p>Perfect for keynotes and graduations</p>
+                    </div>
+                    <ul class='features fs-6 fw-bold'>
+                        <li>4 hours of video</li>
+                        <li>
+                            6+ minute highlight video <p class='fw-normal'>
+                                Blooper of family & guests (if available)
+                            </p>
+                        </li>
+                    </ul>
+                    <button class='btn btn-secondary'>Purchase</button>
+                </PricingCard>
+            </div>
+        </section>
+    </main>
 </BaseLayout>
+<style>
+    .features li::marker {
+        content: '✓';
+    }
+</style>

@@ -1,27 +1,61 @@
 ---
+import { Image } from 'astro:assets';
+import logo from '../assets/images/logo-black.webp';
 import HeaderLink from './HeaderLink.astro';
 import { SITE_TITLE } from '../consts';
+
+const links = [
+    { href: '/nathan-warner-site/about', text: 'About' },
+    { href: '/nathan-warner-site/#', text: 'Pricing' },
+    { href: '/nathan-warner-site/#', text: 'Get Started' },
+];
 ---
 
-<header class="shadow-sm container-fluid gx-5">
-	<nav class="row row-cols-auto align-items-center justify-content-between">
-		<h2 class="m-0 fs-4"><a class="text-decoration-none" href="/astro-bootstrap/">{SITE_TITLE}</a></h2>
-		<div class="internal-links">
-			<HeaderLink href="/astro-bootstrap/">Home</HeaderLink>
-			<HeaderLink href="/astro-bootstrap/blog">Blog</HeaderLink>
-			<HeaderLink href="/astro-bootstrap/about">About</HeaderLink>
-		</div>	
-	</nav>
+<header class='container-fluid'>
+    <nav class='navbar flex-lg-row align-items-center justify-content-between'>
+        <a
+            href='/nathan-warner-site/'
+            title={SITE_TITLE}
+            class='d-flex gap-2 text-decoration-none'>
+            <figure class='d-block ratio ratio-1x1 logo mb-0'>
+                <Image
+                    src={logo}
+                    alt=''
+                    class={'w-100 h-100 object-fit-contain'}
+                    aria-hidden='true'
+                    loading={'eager'}
+                />
+            </figure>
+            <span class='d-inline-block fw-bold fs-6 text-dark'
+                >Nathan Warner</span
+            >
+        </a>
+        <div class='internal-links navbar-nav flex-lg-row gap-3'>
+            {
+                links.map((link, index, linksArr) => (
+                    <HeaderLink
+                        class:list={[
+                            'fw-bold',
+                            `${index === linksArr.length - 1 ? 'btn btn-sm btn-primary' : 'nav-link'}`,
+                        ]}
+                        href={link.href}>
+                        {link.text}
+                    </HeaderLink>
+                ))
+            }
+        </div>
+    </nav>
 </header>
 <style>
-	nav a {
-		padding: 1em 0.5em;
-		color: var(--black);
-		border-bottom: 4px solid transparent;
-		text-decoration: none;
-	}
-	nav a.active {
-		text-decoration: none;
-		border-bottom-color: var(--accent);
-	}
+    a.logo {
+        max-width: 8.125rem;
+    }
+    .nav-link {
+        --bs-nav-link-color: var(--bs-dark);
+        &.active {
+            --bs-navbar-active-color: var(--bs-primary);
+            text-decoration: none;
+            border-bottom-color: var(--accent);
+        }
+    }
 </style>
