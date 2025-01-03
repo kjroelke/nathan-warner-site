@@ -1,0 +1,27 @@
+---
+import HeaderLink from './HeaderLink.astro';
+import { SITE_TITLE } from '../consts';
+---
+
+<header class="shadow-sm container-fluid gx-5">
+	<nav class="row row-cols-auto align-items-center justify-content-between">
+		<h2 class="m-0 fs-4"><a class="text-decoration-none" href="/astro-bootstrap/">{SITE_TITLE}</a></h2>
+		<div class="internal-links">
+			<HeaderLink href="/astro-bootstrap/">Home</HeaderLink>
+			<HeaderLink href="/astro-bootstrap/blog">Blog</HeaderLink>
+			<HeaderLink href="/astro-bootstrap/about">About</HeaderLink>
+		</div>	
+	</nav>
+</header>
+<style>
+	nav a {
+		padding: 1em 0.5em;
+		color: var(--black);
+		border-bottom: 4px solid transparent;
+		text-decoration: none;
+	}
+	nav a.active {
+		text-decoration: none;
+		border-bottom-color: var(--accent);
+	}
+</style>

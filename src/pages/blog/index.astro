@@ -1,0 +1,49 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import FormattedDate from '../../components/FormattedDate.astro';
+
+const posts = (await getCollection('blog')).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+---
+<style>
+	.title {
+		margin: 0;
+		color: rgb(var(--black));
+		line-height: 1;
+	}
+	.date {
+		margin: 0;
+		color: rgb(var(--gray));
+	}
+	ul li a:hover h4,
+	ul li a:hover .date {
+		color: rgb(var(--accent));
+	}
+	ul a:hover img {
+		box-shadow: var(--box-shadow);
+	}
+</style>
+
+<BaseLayout>
+	<main class="container my-5">
+		<section class="row justify-content-center">
+			<ul class="ms-0 mb-0 col-lg-8 row row-cols-1 row-cols-lg-2 row-gap-5 list-unstyled">
+				{
+					posts.map((post,i) => (
+						<li class={`col${0 === i ? ' col-lg-12 mb-3 text-center' : ''}`}>
+							<a href={`/astro-bootstrap/blog/${post.slug}/`} class="text-decoration-none d-block">
+								<img width={720} height={360} src={`/astro-bootstrap/${post.data.heroImage}`} alt="" loading="lazy" class="rounded object-fit-cover w-100"/>
+								<h2 class={`title text-dark${0 === i ? ' fs-1' : ''}`}>{post.data.title}</h2>
+								<p class="date">
+									<FormattedDate date={post.data.pubDate} />
+								</p>
+							</a>
+						</li>
+					))
+				}
+			</ul>
+		</section>
+	</main>
+</BaseLayout>
